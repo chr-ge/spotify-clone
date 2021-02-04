@@ -1,0 +1,27 @@
+type AlbumCategory @model {
+  id: ID!
+  title: String!
+  albums: [Album] @connection(keyName: "byAlbumCategory", fields: ["id"])
+}
+
+type Album @model @key(name: "byAlbumCategory", fields: ["albumCategoryId"]) {
+  id: ID!
+  name: String!
+  creator: String!
+  likes: Int!
+  imageUri: String!
+  artistHeadline: String!
+  albumCategoryId: ID!
+  albumCategory: AlbumCategory @connection(fields: ["albumCategoryId"])
+  songs: [Song] @connection(keyName: "byAlbum", fields: ["id"])
+}
+
+type Song @model @key(name: "byAlbum", fields: ["albumId"]) {
+  id: ID!
+  title: String!
+  artist: String!
+  imageUri: String!
+  uri: String!
+  albumId: ID!
+  album: Album @connection(fields: ["albumId"])
+}
