@@ -5,11 +5,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 49,
     backgroundColor: "#131313",
-    flexDirection: "row",
     width: "100%",
     borderBottomWidth: 2,
     borderColor: "black",
-    alignItems: "center",
+  },
+  progress: {
+    height: 3,
+    backgroundColor: '#BCBCBC'
+  },
+  row: {
+    flexDirection: "row",
   },
   innerContainer: {
     flex: 1,
