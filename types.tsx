@@ -4,14 +4,22 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  TabOne: undefined;
+  Home: undefined;
+  Album: undefined;
   TabTwo: undefined;
 };
 
-export type TabOneParamList = {
-  TabOneScreen: undefined;
+export type HomeParamList = {
+  HomeScreen: undefined;
+  AlbumScreen: undefined;
 };
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export type Album = {
+  id: string;
+  imageUri: string;
+  artistHeadline: string;
+}
