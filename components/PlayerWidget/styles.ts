@@ -33,19 +33,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   image: {
-    width: 75,
-    height: 75,
-    marginRight: 10,
+    width: 70,
+    height: 70,
+    marginRight: 5,
   },
   title: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     marginRight: 10,
   },
   artist: {
     color: "lightgray",
-    fontSize: 16,
+    fontSize: 14,
   },
 });
 

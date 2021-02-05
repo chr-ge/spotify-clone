@@ -12,7 +12,7 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import HomeScreen from "../screens/HomeScreen";
 import AlbumScreen from "../screens/AlbumScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import SearchScreen from "../screens/SearchScreen";
 import { BottomTabParamList, HomeParamList, TabTwoParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -95,7 +95,7 @@ function HomeNavigator() {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerTitle: "Home" }}
+        options={{ headerTitle: "Discover" }}
       />
       <HomeStack.Screen
         name="AlbumScreen"
@@ -112,9 +112,9 @@ function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: "Tab Two Title" }}
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{ headerTitle: "Search" }}
       />
     </TabTwoStack.Navigator>
   );

@@ -6,7 +6,7 @@ export type RootStackParamList = {
 export type BottomTabParamList = {
   Home: undefined;
   Album: undefined;
-  TabTwo: undefined;
+  Search: undefined;
 };
 
 export type HomeParamList = {
@@ -15,7 +15,7 @@ export type HomeParamList = {
 };
 
 export type TabTwoParamList = {
-  TabTwoScreen: undefined;
+  SearchScreen: undefined;
 };
 
 export type Album = {
@@ -30,6 +30,7 @@ export type Album = {
 export type Song = {
   id: string;
   imageUri: string;
+  uri: string;
   title: string;
   artist: string;
 };

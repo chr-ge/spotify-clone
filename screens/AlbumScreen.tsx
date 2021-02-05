@@ -40,6 +40,7 @@ const AlbumScreen = () => {
             title={item.title}
             artist={item.artist}
             imageUri={item.imageUri}
+            uri={item.uri}
           />
         )}
         ListHeaderComponent={
