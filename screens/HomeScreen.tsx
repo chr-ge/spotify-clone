@@ -1,41 +1,36 @@
-import * as React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, FlatList } from "react-native";
+import { API, graphqlOperation } from "aws-amplify";
 
+import { listAlbumCategorys } from "../src/graphql/queries";
 import AlbumCategory from "../components/AlbumCategory";
 
-const ALBUMS = [
-  {
-    id: "1",
-    imageUri: "https://i.pinimg.com/736x/d4/66/18/d46618c066d144acc4a82fec6a4c8275.jpg",
-    artistHeadline: "Post Malone",
-  },
-  {
-    id: "2",
-    imageUri: "https://i.pinimg.com/736x/d4/66/18/d46618c066d144acc4a82fec6a4c8275.jpg",
-    artistHeadline: "Post Malone 2",
-  },
-  {
-    id: "3",
-    imageUri: "https://i.pinimg.com/736x/d4/66/18/d46618c066d144acc4a82fec6a4c8275.jpg",
-    artistHeadline: "Post Malone 3",
-  },
-];
+export default function HomeScreen() {
+  const [categories, setCategories] = useState<any>([]);
 
-export default function TabOneScreen() {
+  useEffect(() => {
+    const fetchAlbumCategories = async () => {
+      try {
+        const data: any = await API.graphql(
+          graphqlOperation(listAlbumCategorys)
+        );
+        setCategories(data.data.listAlbumCategorys.items);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAlbumCategories();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <FlatList 
-        data={ALBUMS}
+    <View>
+      <FlatList
+        data={categories}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <AlbumCategory title='Chill' albums={ALBUMS} />}
+        renderItem={({ item }) => (
+          <AlbumCategory title={item.title} albums={item.albums.items} />
+        )}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center'
-  }
-})

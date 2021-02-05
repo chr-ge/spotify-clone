@@ -1,33 +1,38 @@
-import React, { useEffect } from "react";
-import { View, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, FlatList } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { API, graphqlOperation } from "aws-amplify";
+
 import AlbumHeader from "../components/AlbumHeader";
 import SongListItem from "../components/SongListItem";
+import { getAlbum } from "../src/graphql/queries";
+import { Album } from "../types";
 
 const AlbumScreen = () => {
-  const route = useRoute();
+  const route: any = useRoute();
+  const [album, setAlbum] = useState<(Album & { songs: any }) | null>(null);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getAlbums = async () => {
+      try {
+        const data: any = await API.graphql(
+          graphqlOperation(getAlbum, { id: route.params.id })
+        );
+        setAlbum(data.data.getAlbum);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getAlbums();
+  }, []);
+
+  if (!album) return <Text style={{ color: "white" }}>Loading...</Text>;
 
   return (
     <View>
       <FlatList
-        data={[
-          {
-            id: "1",
-            title: "Good Song",
-            artist: "Mark",
-            imageUri:
-              "https://i.pinimg.com/736x/d4/66/18/d46618c066d144acc4a82fec6a4c8275.jpg",
-          },
-          {
-            id: "2",
-            title: "Better Song",
-            artist: "Mark Cuban",
-            imageUri:
-              "https://i.pinimg.com/736x/d4/66/18/d46618c066d144acc4a82fec6a4c8275.jpg",
-          },
-        ]}
+        data={album.songs.items}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <SongListItem
@@ -39,12 +44,12 @@ const AlbumScreen = () => {
         )}
         ListHeaderComponent={
           <AlbumHeader
-            id="1"
-            imageUri="https://i.pinimg.com/736x/d4/66/18/d46618c066d144acc4a82fec6a4c8275.jpg"
-            creator="George"
-            name="Post Malone"
-            artistHeadline="Post Malone"
-            likes={40}
+            id={album.id}
+            imageUri={album.imageUri}
+            creator={album.creator}
+            name={album.name}
+            artistHeadline={album.artistHeadline}
+            likes={album.likes}
           />
         }
       />
