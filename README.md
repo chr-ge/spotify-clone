@@ -1,5 +1,5 @@
 # Spotify
-React Native Spotify Clone w/ AWS Amplify Backend
+React Native Spotify Clone w/ AWS Amplify Backend (GraphQL API)
 
 Home Screen |  Album Screen
 :-------------------------:|:-------------------------:
